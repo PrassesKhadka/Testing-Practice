@@ -24,7 +24,13 @@ const alphabet='abcdefghijklmnopqrstuvwxyz'
 const cipher='bcdefghijklmnopqrstuvwxyza'
 
 function toCheckUpperCase(char) {
-    if (char == char.toUpperCase()) {
+    //char !=char.toLowerCase() because:
+    //@ return true both on .toUpperCase() and .toLowerCase()
+    //when char ='@' @==char.toUpperCase() returns true
+    //but returns false on !=char.toLowerCase()
+    //Thus solves the error on the passing of special characters
+    
+    if (char == char.toUpperCase() && char != char.toLowerCase()) {
         return true;
     }
     else
@@ -34,13 +40,21 @@ function toCheckUpperCase(char) {
 }
 
 function toCheckLowerCase(char) {
-    if (char == char.toLowerCase()) {
+    if (char == char.toLowerCase() && char !=char.toUpperCase()) {
         return true;
     }
     else
     {
         return false;
     }
+}
+
+function isString(string)
+{
+    if (typeof(string)=='string')
+        return true;
+    else    
+        return false;
 }
 
 function cipherFunc(char)
@@ -65,20 +79,28 @@ function convert(char)
         return cipherFunc(char)
     }
     //If character is:!,@,#,$,%...
-    else if(!toCheckUpperCase(char) && !toCheckLowerCase(char))
+    else
     {
         return char;
     }
 }
 function caesarCipher(string) {
-    let converted_string=''
-    for (let i = 0; i < string.length; i++) {
-        let char=string[i]
-        //A new declared string
-        let new_char=convert(char)
-        converted_string+=new_char
+    if(isString(string))
+    {
+        let converted_string=''
+        for (let i = 0; i < string.length; i++) {
+            let char=string[i]
+            //A new declared string
+            let new_char=convert(char)
+            converted_string+=new_char
+        }
+
+        return converted_string
     }
-    return converted_string
+    else 
+    {
+        return 'not a string'
+    }
 }
 module.exports = caesarCipher
 
