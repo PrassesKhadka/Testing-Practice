@@ -29,7 +29,7 @@ function toCheckUpperCase(char) {
     //when char ='@' @==char.toUpperCase() returns true
     //but returns false on !=char.toLowerCase()
     //Thus solves the error on the passing of special characters
-    
+
     if (char == char.toUpperCase() && char != char.toLowerCase()) {
         return true;
     }
@@ -85,22 +85,14 @@ function convert(char)
     }
 }
 function caesarCipher(string) {
-    if(isString(string))
-    {
-        let converted_string=''
-        for (let i = 0; i < string.length; i++) {
-            let char=string[i]
-            //A new declared string
-            let new_char=convert(char)
-            converted_string+=new_char
-        }
-
-        return converted_string
+    let converted_string=''
+    for (let i = 0; i < string.length; i++) {
+        let char=string[i]
+        //A new declared string
+        let new_char=convert(char)
+        converted_string+=new_char
     }
-    else 
-    {
-        return 'not a string'
-    }
+    return converted_string
 }
 module.exports = caesarCipher
 
